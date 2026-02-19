@@ -1,0 +1,138 @@
+/* App-specific styles */
+
+/* Ensure smooth scrolling behavior */
+html {
+  scroll-behavior: auto;
+}
+
+/* Remove default margins */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure full-width sections */
+section {
+  width: 100%;
+}
+
+.section-surface {
+  background: rgba(11, 11, 13, 0.35); /* transparent surface */
+  backdrop-filter: blur(0px);
+}
+
+/* Fix for pinned sections */
+.pin-spacer {
+  overflow: visible !important;
+}
+
+/* Ensure images don't overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Details/summary styling for FAQ */
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] > summary > svg {
+  transform: rotate(180deg);
+}
+
+/* Smooth transitions for interactive elements */
+a, button {
+  transition: all 0.2s ease;
+}
+
+/* Focus states */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(185, 185, 185, 0.5);
+  outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(185, 185, 185, 0.3);
+  color: #F4F4F5;
+}
+
+/* =========================================
+   Duke Tech Architecture Background
+   Lines + grid + stars + moving sweeps
+   ========================================= */
+
+.tech-arch-bg {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Layer 1: Deep base + blue glow */
+.tech-arch-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+
+  background:
+    radial-gradient(900px 650px at 18% 22%, rgba(0,120,255,0.18), transparent 60%),
+    radial-gradient(700px 520px at 82% 30%, rgba(0,160,255,0.12), transparent 62%),
+    radial-gradient(900px 650px at 50% 78%, rgba(0,90,200,0.10), transparent 65%),
+    linear-gradient(180deg, #050507 0%, #0b0b0d 60%, #050507 100%);
+}
+
+/* Layer 2: Grid + diagonals (architecture lines) */
+.tech-arch-bg::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.22;
+
+  background-image:
+    /* vertical grid */
+    repeating-linear-gradient(
+      90deg,
+      rgba(244,244,245,0.06) 0px,
+      rgba(244,244,245,0.06) 1px,
+      transparent 1px,
+      transparent 72px
+    ),
+    /* horizontal grid */
+    repeating-linear-gradient(
+      0deg,
+      rgba(244,244,245,0.05) 0px,
+      rgba(244,244,245,0.05) 1px,
+      transparent 1px,
+      transparent 72px
+    ),
+    /* diagonal tech lines */
+    repeating-linear-gradient(
+      135deg,
+      rgba(0,120,255,0.10) 0px,
+      rgba(0,120,255,0.10) 1px,
+      transparent 1px,
+      transparent 120px
+    );
+
+  background-size: 120% 120%;
+  animation: archDrift 24s ease-in-out infinite;
+  transform: translateZ(0);
+}
+
+@keyframes archDrift {
+  0%   { background-position: 0% 0%, 0% 0%, 0% 0%; }
+  50%  { background-position: 100% 60%, 60% 100%, 40% 100%; }
+  100% { background-position: 0% 0%, 0% 0%, 0% 0%; }
+}
